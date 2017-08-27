@@ -32,9 +32,10 @@ openldap_sync_users:
                     - inetOrgPerson
                     - extensibleObject
                 mail: {{ options.get('mail', '') }}
-                displayName: {{ options.get('name', '') }}
+                displayName: {{ options.get('given_name', '') }} {{ options.get('surname', '') }}
                 userPrincipalName: {{ user }}
                 userPassword: {{ options.get('password', '') }}
+                givenName: {{ options.get('given_name', '') }}
                 sn: {{ options.get('surname', '') }}
                 otherMailBox:
                   {% for alias in options.get('mail_aliases', []) %}
