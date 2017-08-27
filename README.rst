@@ -15,32 +15,32 @@ Available states
     :local:
 
 
-``ldap``
+``openldap``
 -----------
 
 Includes all the states below.
 
-``ldap.server``
+``openldap.server``
 ------------------
 
 Installs, configures and starts slapd.
 
-``ldap.client``
+``openldap.client``
 ------------------
 
-Installs ldap-utils and python-ldap
+Installs openldap-utils and python-openldap
 
-``ldap.memberof``
+``openldap.memberof``
 ------------------
 
 Configures the memberOf overlay.
 
-``ldap.users``
+``openldap.users``
 ------------------
 
 Manage a list of users.
 
-``postfix.groups``
+``openldap.groups``
 ------------------
 
 Manage a list of groups.

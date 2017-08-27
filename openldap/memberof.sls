@@ -1,8 +1,6 @@
-{% set ldap = salt['pillar.get']('ldap_data') %}
-
 include:
-  - ldap.server
-  - ldap.client
+  - openldap.server
+  - openldap.client
 
 ldap_memberof_overlay:
   ldap.managed:

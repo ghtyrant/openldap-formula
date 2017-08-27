@@ -1,11 +1,12 @@
-{% set ldap = salt['pillar.get']('ldap_data') %}
+{% set ldap = salt['pillar.get']('openldap') %}
 
 include:
-  - ldap.server
-  - ldap.client
+  - openldap.server
+  - openldap.client
 
-ldapi:///:
+openldap_sync_users:
   ldap.managed:
+    - name: ldapi:///
     - connect_spec:
         bind:
           method: simple

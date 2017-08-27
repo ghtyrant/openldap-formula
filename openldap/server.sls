@@ -1,4 +1,4 @@
-{% set ldap = salt['pillar.get']('ldap_data') %}
+{% set ldap = salt['pillar.get']('openldap') %}
 
 slapd_debconf:
   debconf.set:
