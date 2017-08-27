@@ -3,6 +3,7 @@
 include:
   - openldap.server
   - openldap.client
+  - openldap.schema_misc
 
 openldap_sync_users:
   ldap.managed:
@@ -22,20 +23,21 @@ openldap_sync_users:
                 ou: {{ ldap.users_ou }}
 
 {% for user, options in ldap.users.items() %}
-        - uid={{ user }},ou={{ ldap.users_ou }},{{ ldap.base_dn }}:
+        - cn={{ user }},ou={{ ldap.users_ou }},{{ ldap.base_dn }}:
             - delete_others: True
             - replace:
-                cn: {{ options.get('name', '') }}
+                cn: {{ user }}
                 uid: {{ user }}
                 objectClass:
                     - person
                     - inetOrgPerson
+                    - inetLocalMailRecipient
                 mail: {{ options.get('mail', '') }}
                 displayName: {{ options.get('given_name', '') }} {{ options.get('surname', '') }}
                 userPassword: '{{ options.get('password', '') }}'
                 givenName: {{ options.get('given_name', '') }}
                 sn: {{ options.get('surname', '') }}
-                otherMailBox:
+                mailLocalAddress:
                   {% for alias in options.get('mail_aliases', []) %}
                     - {{ alias }}
                   {% endfor %}
