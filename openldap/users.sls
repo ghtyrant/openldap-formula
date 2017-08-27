@@ -29,6 +29,7 @@ openldap_sync_users:
                 uid: {{ user }}
                 objectClass:
                     - person
+                    - user
                     - inetOrgPerson
                     - extensibleObject
                 mail: {{ options.get('mail', '') }}
