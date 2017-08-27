@@ -33,6 +33,7 @@ openldap_sync_users:
                     - extensibleObject
                 mail: {{ options.get('mail', '') }}
                 displayName: {{ options.get('name', '') }}
+                userPrincipalName: {{ user }}
                 sn: {{ options.get('surname', '') }}
                 otherMailBox:
                   {% for alias in options.get('mail_aliases', []) %}
