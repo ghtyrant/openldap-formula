@@ -34,6 +34,7 @@ openldap_sync_users:
                 mail: {{ options.get('mail', '') }}
                 displayName: {{ options.get('name', '') }}
                 userPrincipalName: {{ user }}
+                userPassword: {{ options.get('password', '') }}
                 sn: {{ options.get('surname', '') }}
                 otherMailBox:
                   {% for alias in options.get('mail_aliases', []) %}
