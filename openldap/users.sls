@@ -33,8 +33,8 @@ openldap_sync_users:
                     - extensibleObject
                 mail: {{ options.get('mail', '') }}
                 displayName: {{ options.get('given_name', '') }} {{ options.get('surname', '') }}
-                userPrincipalName: {{ user }}
-                userPassword: {{ options.get('password', '') }}
+                sAMAccountName: {{ user }}
+                userPassword: '{{ options.get('password', '') }}'
                 givenName: {{ options.get('given_name', '') }}
                 sn: {{ options.get('surname', '') }}
                 otherMailBox:
