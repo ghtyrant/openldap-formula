@@ -31,7 +31,7 @@ openldap_sync_groups:
 
                 member:
                 {% for user in options.users %}
-                  - uid={{ user }},ou={{ ldap.users_ou }},{{ ldap.base_dn }}
+                  - cn={{ user }},ou={{ ldap.users_ou }},{{ ldap.base_dn }}
                 {% endfor %}
 {% endfor %}
 
