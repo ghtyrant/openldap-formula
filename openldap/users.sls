@@ -23,22 +23,32 @@ openldap_sync_users:
                 ou: {{ ldap.users_ou }}
 
 {% for user, options in ldap.users.items() %}
+{% set system_user = options.get('system', False) %}
         - cn={{ user }},ou={{ ldap.users_ou }},{{ ldap.base_dn }}:
             - delete_others: True
             - replace:
                 cn: {{ user }}
-                uid: {{ user }}
                 objectClass:
                     - person
+                    {% if not system_user %}
                     - inetOrgPerson
                     - inetLocalMailRecipient
+                    {% endif %}
+
+                userPassword: '{{ options.get('password', '') }}'
+
+                {% if not system_user %}
+                uid: {{ user }}
                 mail: {{ options.get('mail', '') }}
                 displayName: {{ options.get('given_name', '') }} {{ options.get('surname', '') }}
-                userPassword: '{{ options.get('password', '') }}'
                 givenName: {{ options.get('given_name', '') }}
                 sn: {{ options.get('surname', '') }}
                 mailLocalAddress:
                   {% for alias in options.get('mail_aliases', []) %}
                     - {{ alias }}
                   {% endfor %}
+
+                {% else %}
+                sn: {{ user }}
+                {% endif %}
 {% endfor %}
